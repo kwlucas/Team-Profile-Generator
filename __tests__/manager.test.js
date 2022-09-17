@@ -56,6 +56,19 @@ describe("Manager", () => {
         });
     });
 
+    describe("getOffice", () => {
+        it("should return the email of Manager", () => {
+            const newId = "7";
+            const newName = "Chester";
+            const newEmail = "test@email.com";
+            const newOffice = "5";
+
+            const result = new Manager(newId, newName, newEmail, newOffice).getOffice();
+
+            expect(result).toEqual(newOffice);
+        });
+    });
+
     describe("getRole", () => {
         it("should return the role of Manager", () => {
             const newId = "7";
