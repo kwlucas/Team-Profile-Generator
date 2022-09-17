@@ -13,10 +13,26 @@
     "type": "git",
     "url": "git+https://github.com/kwlucas/Team-Profile-Generator.git"
   },
+  "keywords": [
+    "profile",
+    "generator",
+    "html",
+    "css",
+    "student_project",
+    "project",
+    "node.js",
+    "inquirer"
+  ],
   "author": "Kyle Lucas",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kwlucas/Team-Profile-Generator/issues"
   },
-  "homepage": "https://github.com/kwlucas/Team-Profile-Generator#readme"
+  "homepage": "https://github.com/kwlucas/Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }
