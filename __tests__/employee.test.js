@@ -50,4 +50,16 @@ describe("Employee", () => {
             expect(result).toEqual(newEmail);
         });
     });
+
+    describe("getRole", () => {
+        it("should return the role of employee", () => {
+            const newId = "7";
+            const newName = "Chester";
+            const newEmail = "test@email.com";
+
+            const result = new Employee(newId, newName, newEmail).getRole();
+
+            expect(result).toEqual('Employee');
+        });
+    });
 });
