@@ -26,4 +26,16 @@ describe("Employee", () => {
             expect(result).toEqual(newId);
         });
     });
+
+    describe("getName", () => {
+        it("should return the name of employee", () => {
+            const newId = "7";
+            const newName = "Chester";
+            const newEmail = "test@email.com";
+
+            const result = new Employee(newId, newName, newEmail).getName();
+
+            expect(result).toEqual(newName);
+        });
+    });
 });
