@@ -56,6 +56,19 @@ describe("Engineer", () => {
         });
     });
 
+    describe("getGithub", () => {
+        it("should return the email of Engineer", () => {
+            const newId = "7";
+            const newName = "Chester";
+            const newEmail = "test@email.com";
+            const newGithub = "github/user.com";
+
+            const result = new Engineer(newId, newName, newEmail, newGithub).getGithub();
+
+            expect(result).toEqual(newGithub);
+        });
+    });
+
     describe("getRole", () => {
         it("should return the role of Engineer", () => {
             const newId = "7";
