@@ -56,6 +56,19 @@ describe("Intern", () => {
         });
     });
 
+    describe("getSchool", () => {
+        it("should return the email of Intern", () => {
+            const newId = "7";
+            const newName = "Chester";
+            const newEmail = "test@email.com";
+            const newSchool = "Test University";
+
+            const result = new Intern(newId, newName, newEmail, newSchool).getSchool();
+
+            expect(result).toEqual(newSchool);
+        });
+    });
+
     describe("getRole", () => {
         it("should return the role of Intern", () => {
             const newId = "7";
