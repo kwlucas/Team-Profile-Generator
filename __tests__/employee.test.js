@@ -38,4 +38,16 @@ describe("Employee", () => {
             expect(result).toEqual(newName);
         });
     });
+
+    describe("getEmail", () => {
+        it("should return the email of employee", () => {
+            const newId = "7";
+            const newName = "Chester";
+            const newEmail = "test@email.com";
+
+            const result = new Employee(newId, newName, newEmail).getEmail();
+
+            expect(result).toEqual(newEmail);
+        });
+    });
 });
