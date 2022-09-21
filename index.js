@@ -209,12 +209,25 @@ async function removePrompt(){
     let idForRemoval = '';
     for (let i = 0; i < employeeArray.length; i++) {
         if(employeeArray[i].getName() == nameForRemoval){
-            idForRemoval = employeeArray[i].getId()
+            idForRemoval = employeeArray[i].getId();
+            break;
         }
-        
     }
     return idForRemoval;
 
+}
+
+function removeEmployee(id) {
+    if(!id){
+        return;
+    }
+    for (let i = 0; i < employeeArray.length; i++) {
+        if(employeeArray[i].getId() === id){
+            employeeArray.splice(i, 1);
+            break;
+        }
+    }
+    return;
 }
 
 //DISCARD TEAM
