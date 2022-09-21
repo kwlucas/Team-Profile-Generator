@@ -97,6 +97,32 @@ const internPrompt = [
         }
     }
 ]
+
+//Build a new team?
+//Team Name
+//Add employee, remove employee, discard team, generate profile
+
+//ADD EMPLOYEE
+//employee prompt (id, name, email, role)
+//Ask extra property coressponding to employee role if needed CASE
+//Create object with given responses CASE  
+//add new object to employee array
+//Return to "Add employee, remove employee, discard team, generate profile" selection
+
+//REMOVE EMPLOYEE
+//use prompt with choice option function reading the employee array.
+//removes the selected employee from array
+//Return to "Add employee, remove employee, discard team, generate profile" selection
+
+//DISCARD TEAM
+//Exit and returns to root selection menu
+//resets employee array
+
+//GENERATE PROFILE
+//Generates the html file from the employee array
+//resets the employee array and returns to root selection menu
+
+
 // function addItemPrompt(item) {
 //     const itemPrompt = {
 //         type: 'confirm',
