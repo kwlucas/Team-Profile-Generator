@@ -166,7 +166,8 @@ async function buildOptions() {
             await addEmployee();
             break;
         case 'Remove an employee':
-            await removeEmployee(await removePrompt());
+            removeEmployee(await removePrompt());
+            buildOptions();
             break;
         case 'Discard team profile':
             launch();
