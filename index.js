@@ -81,6 +81,22 @@ const engineerPrompt = [
         }   
     }
 ]
+
+const internPrompt = [
+    {
+        type: 'input',
+        name: 'school',
+        message: 'What school does the intern attend?',
+        validate: (ans) => { //verify that a response was entered.
+            if (ans) {
+                return true;
+            }
+            else {
+                return 'Please enter a valid school name.';
+            }
+        }
+    }
+]
 // function addItemPrompt(item) {
 //     const itemPrompt = {
 //         type: 'confirm',
