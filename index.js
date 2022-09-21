@@ -53,7 +53,7 @@ const employeePrompts = [
 const managerPrompt = [
     {
         type: 'input',
-        name: 'name',
+        name: 'officeNumber',
         message: "What is the manager's office number?",
         validate: (ans) => { //verify that a response was entered.
             if (ans && !/[\D]/g.test(ans)) {
@@ -61,6 +61,22 @@ const managerPrompt = [
             }
             else {
                 return 'Please enter a valid office number.';
+            }
+        }   
+    }
+]
+
+const engineerPrompt = [
+    {
+        type: 'input',
+        name: 'github',
+        message: "What is the engineer's github profile link?",
+        validate: (ans) => { //verify that a response was entered.
+            if (ans && /https:\/\/github\.com\/[\w]+$/i.test(ans)) {
+                return true;
+            }
+            else {
+                return 'Please enter a valid github profile link.';
             }
         }   
     }
