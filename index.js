@@ -97,7 +97,7 @@ const managerPrompt = [
             else {
                 return 'Please enter a valid office number.';
             }
-        }   
+        }
     }
 ]
 
@@ -113,7 +113,7 @@ const engineerPrompt = [
             else {
                 return 'Please enter a valid github profile link.';
             }
-        }   
+        }
     }
 ]
 
@@ -137,10 +137,52 @@ const internPrompt = [
 //Team Name
 //Add employee, remove employee, discard team, generate profile
 
+let employeeArray = [];
+let profileTitle = '';
+
+async function launch() {
+    employeeArray = [];
+    profileTitle = '';
+    const { rootSelection } = await inquirer.prompt(rootPrompt);
+    switch (rootSelection) {
+        case 'Build a team profile':
+            profileTitle = await inquirer.prompt(teamPrompt).title;
+            buildOptions();
+            break;
+
+        default:
+            console.log('Goodbye.');
+            process.exitCode = 0;
+            break;
+    }
+
+}
+//choices: ['Add an employee', 'Remove an employee', 'Discard team profile', 'Finalize team profile'],
+
+async function buildOptions() {
+    const action = await inquirer.prompt(buildPrompt).buildSelection;
+    switch (action) {
+        case 'Add an employee':
+            await addEmployee();
+            break;
+        case 'Remove an employee':
+            removeEmployee(await removePrompt());
+            buildOptions();
+            break;
+        case 'Discard team profile':
+            launch();
+            break;
+        case 'Finalize team profile':
+            await writeProfile();
+            launch();
+            break;
+    }
+}
+
 //ADD EMPLOYEE
 //employee prompt (id, name, email, role)
 //Ask extra property coressponding to employee role if needed CASE
-//Create object with given responses CASE  
+//Create object with given responses CASE
 //add new object to employee array
 //Return to "Add employee, remove employee, discard team, generate profile" selection
 
@@ -148,6 +190,46 @@ const internPrompt = [
 //use prompt with choice option function reading the employee array.
 //removes the selected employee from array
 //Return to "Add employee, remove employee, discard team, generate profile" selection
+async function removePrompt(){
+    const removalPrompt = [
+        {
+            type: 'list',
+            name: 'nameForRemoval',
+            message: "What employee would you like to remove?",
+            choices: function() {
+                let options = ['Cancel'];
+                for (let i = 0; i < employeeArray.length; i++) {
+                    options.push(employeeArray[i].getName());
+                }
+                return options;
+            },
+            default: 0//Cancel
+        }
+    ];
+    const { nameForRemoval } = await inquirer.prompt(removalPrompt);
+    let idForRemoval = '';
+    for (let i = 0; i < employeeArray.length; i++) {
+        if(employeeArray[i].getName() == nameForRemoval){
+            idForRemoval = employeeArray[i].getId();
+            break;
+        }
+    }
+    return idForRemoval;
+
+}
+
+function removeEmployee(id) {
+    if(!id){
+        return;
+    }
+    for (let i = 0; i < employeeArray.length; i++) {
+        if(employeeArray[i].getId() === id){
+            employeeArray.splice(i, 1);
+            break;
+        }
+    }
+    return;
+}
 
 //DISCARD TEAM
 //Exit and returns to root selection menu
