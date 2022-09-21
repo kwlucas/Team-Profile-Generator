@@ -137,6 +137,31 @@ const internPrompt = [
 //Team Name
 //Add employee, remove employee, discard team, generate profile
 
+let employeeArray = [];
+let profileTitle = '';
+
+async function launch() {
+    employeeArray = [];
+    profileTitle = '';
+    const action = await inquirer.prompt(rootPrompt);
+    switch (action.rootSelection) {
+        case 'Build a team profile':
+            profileTitle = await inquirer.prompt(teamPrompt).title;
+            buildOptions();
+            break;
+    
+        default:
+            console.log('Goodbye.');
+            process.exitCode = 0;
+            break;
+    }
+
+}
+
+async function buildOptions() {
+    //
+}
+
 //ADD EMPLOYEE
 //employee prompt (id, name, email, role)
 //Ask extra property coressponding to employee role if needed CASE
