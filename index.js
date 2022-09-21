@@ -1,6 +1,41 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
+const rootPrompt = [
+    {
+        type: 'list',
+        name: 'rootSelection',
+        message: "Select an action.",
+        choices: ['Build a team profile', 'Exit'],
+        default: 1 //choices[1], 'Exit'
+    }
+]
+
+const teamPrompt = [
+    {
+        type: 'input',
+        name: 'title',
+        message: 'Enter a title for the team profile.',
+        validate: (ans) => { //verify that a response was entered.
+            if (ans) {
+                return true;
+            }
+            else {
+                return 'Please enter a valid title.';
+            }
+        }
+    }
+]
+
+const buildPrompt = [
+    {
+        type: 'list',
+        name: 'buildSelection',
+        message: "What would you like to do?",
+        choices: ['Add an employee', 'Remove an employee', 'Discard team profile', 'Finalize team profile'],
+    }
+]
+
 const employeePrompts = [
     {
         type: 'input',
@@ -97,6 +132,32 @@ const internPrompt = [
         }
     }
 ]
+
+//Build a new team?
+//Team Name
+//Add employee, remove employee, discard team, generate profile
+
+//ADD EMPLOYEE
+//employee prompt (id, name, email, role)
+//Ask extra property coressponding to employee role if needed CASE
+//Create object with given responses CASE  
+//add new object to employee array
+//Return to "Add employee, remove employee, discard team, generate profile" selection
+
+//REMOVE EMPLOYEE
+//use prompt with choice option function reading the employee array.
+//removes the selected employee from array
+//Return to "Add employee, remove employee, discard team, generate profile" selection
+
+//DISCARD TEAM
+//Exit and returns to root selection menu
+//resets employee array
+
+//GENERATE PROFILE
+//Generates the html file from the employee array
+//resets the employee array and returns to root selection menu
+
+
 // function addItemPrompt(item) {
 //     const itemPrompt = {
 //         type: 'confirm',
