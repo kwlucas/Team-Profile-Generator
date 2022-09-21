@@ -1,6 +1,48 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
+const employeePrompts = [
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is the id of the employee?',
+        validate: (ans) => { //verify that a response was entered.
+            if (ans && !/[\D]/g.test(ans)) {
+                return true;
+            }
+            else {
+                return 'Please enter a valid id.';
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'name',
+        message: 'What is the name of the employee?',
+        validate: (ans) => { //verify that a response was entered.
+            if (ans) {
+                return true;
+            }
+            else {
+                return 'Please enter a valid name.';
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: "What is the employee's email address?",
+        validate: (ans) => { //verify that a response was entered.
+            if (ans && /^[\w\.]+@[\w]+\.com/i.test(ans)) {
+                return true;
+            }
+            else {
+                return 'Please enter a valid email address.';
+            }
+        }
+    },
+]
+
 // function addItemPrompt(item) {
 //     const itemPrompt = {
 //         type: 'confirm',
