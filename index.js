@@ -97,7 +97,7 @@ const managerPrompt = [
             else {
                 return 'Please enter a valid office number.';
             }
-        }   
+        }
     }
 ]
 
@@ -113,7 +113,7 @@ const engineerPrompt = [
             else {
                 return 'Please enter a valid github profile link.';
             }
-        }   
+        }
     }
 ]
 
@@ -143,13 +143,13 @@ let profileTitle = '';
 async function launch() {
     employeeArray = [];
     profileTitle = '';
-    const action = await inquirer.prompt(rootPrompt);
-    switch (action.rootSelection) {
+    const { rootSelection } = await inquirer.prompt(rootPrompt);
+    switch (rootSelection) {
         case 'Build a team profile':
             profileTitle = await inquirer.prompt(teamPrompt).title;
             buildOptions();
             break;
-    
+
         default:
             console.log('Goodbye.');
             process.exitCode = 0;
@@ -165,7 +165,7 @@ async function buildOptions() {
 //ADD EMPLOYEE
 //employee prompt (id, name, email, role)
 //Ask extra property coressponding to employee role if needed CASE
-//Create object with given responses CASE  
+//Create object with given responses CASE
 //add new object to employee array
 //Return to "Add employee, remove employee, discard team, generate profile" selection
 
