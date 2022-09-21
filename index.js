@@ -157,9 +157,25 @@ async function launch() {
     }
 
 }
+//choices: ['Add an employee', 'Remove an employee', 'Discard team profile', 'Finalize team profile'],
 
 async function buildOptions() {
-    //
+    const action = await inquirer.prompt(buildPrompt).buildSelection;
+    switch (action) {
+        case 'Add an employee':
+            await addEmployee();
+            break;
+        case 'Remove an employee':
+            await removeEmployee(await inquirer.prompt(removePrompt).idForRemoval);
+            break;
+        case 'Discard team profile':
+            launch();
+            break;
+        case 'Finalize team profile':
+            await writeProfile();
+            launch();
+            break;
+    }
 }
 
 //ADD EMPLOYEE
