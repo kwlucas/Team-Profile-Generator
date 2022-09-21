@@ -166,7 +166,7 @@ async function buildOptions() {
             await addEmployee();
             break;
         case 'Remove an employee':
-            await removeEmployee(await inquirer.prompt(removePrompt).idForRemoval);
+            await removeEmployee(await removePrompt());
             break;
         case 'Discard team profile':
             launch();
@@ -189,6 +189,33 @@ async function buildOptions() {
 //use prompt with choice option function reading the employee array.
 //removes the selected employee from array
 //Return to "Add employee, remove employee, discard team, generate profile" selection
+async function removePrompt(){
+    const removalPrompt = [
+        {
+            type: 'list',
+            name: 'nameForRemoval',
+            message: "What employee would you like to remove?",
+            choices: function() {
+                let options = ['Cancel'];
+                for (let i = 0; i < employeeArray.length; i++) {
+                    options.push(employeeArray[i].getName());
+                }
+                return options;
+            },
+            default: 0//Cancel
+        }
+    ];
+    const { nameForRemoval } = await inquirer.prompt(removalPrompt);
+    let idForRemoval = '';
+    for (let i = 0; i < employeeArray.length; i++) {
+        if(employeeArray[i].getName() == nameForRemoval){
+            idForRemoval = employeeArray[i].getId()
+        }
+        
+    }
+    return idForRemoval;
+
+}
 
 //DISCARD TEAM
 //Exit and returns to root selection menu
