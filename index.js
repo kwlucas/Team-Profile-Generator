@@ -50,6 +50,21 @@ const employeePrompts = [
     },
 ]
 
+const managerPrompt = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is the manager's office number?",
+        validate: (ans) => { //verify that a response was entered.
+            if (ans && !/[\D]/g.test(ans)) {
+                return true;
+            }
+            else {
+                return 'Please enter a valid office number.';
+            }
+        }   
+    }
+]
 // function addItemPrompt(item) {
 //     const itemPrompt = {
 //         type: 'confirm',
