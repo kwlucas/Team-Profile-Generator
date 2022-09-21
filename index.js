@@ -1,6 +1,16 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
+const rootPrompt = [
+    {
+        type: 'list',
+        name: 'rootSelection',
+        message: "Select an action.",
+        choices: ['Build a team profile', 'Exit'],
+        default: 1 //choices[1], 'Exit'
+    }
+]
+
 const employeePrompts = [
     {
         type: 'input',
