@@ -41,6 +41,13 @@ const employeePrompts = [
             }
         }
     },
+    {
+        type: 'list',
+        name: 'role',
+        message: "What is the employee's role?",
+        choices: ['Manager', 'Engineer', 'Intern', 'Other'],
+        default: 3 //choices[3] 'Other'
+    },
 ]
 
 // function addItemPrompt(item) {
