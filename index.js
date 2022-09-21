@@ -27,6 +27,15 @@ const teamPrompt = [
     }
 ]
 
+const buildPrompt = [
+    {
+        type: 'list',
+        name: 'buildSelection',
+        message: "What would you like to do?",
+        choices: ['Add an employee', 'Remove an employee', 'Discard team profile', 'Finalize team profile'],
+    }
+]
+
 const employeePrompts = [
     {
         type: 'input',
