@@ -11,6 +11,22 @@ const rootPrompt = [
     }
 ]
 
+const teamPrompt = [
+    {
+        type: 'input',
+        name: 'title',
+        message: 'Enter a title for the team profile.',
+        validate: (ans) => { //verify that a response was entered.
+            if (ans) {
+                return true;
+            }
+            else {
+                return 'Please enter a valid title.';
+            }
+        }
+    }
+]
+
 const employeePrompts = [
     {
         type: 'input',
