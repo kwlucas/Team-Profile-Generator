@@ -332,6 +332,11 @@ function writeProfile() {
         </main>
     </body>
     </html>`
+
+    fs.writeFile(`./dist/${profileTitle}.html`, htmlString, (err) => {
+        //conditional ternary operator for catching error
+        err ? console.error(err) : console.log(`"${fileName}" has been written.`);
+    })
 }
 
 function extractUsername(link) {
