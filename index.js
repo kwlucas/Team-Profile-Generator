@@ -263,7 +263,8 @@ function removeEmployee(id) {
 //GENERATE PROFILE
 //Generates the html file from the employee array
 //resets the employee array and returns to root selection menu
-function writeProfile(){
+function writeProfile() {
+    let cards = [];
     employeeArray.forEach(employee => {
         const type = employee.getRole();
         let property = '';
@@ -272,7 +273,7 @@ function writeProfile(){
                 property = `<p>Office Number: ${employee.getOffice()}</p>`;
                 break;
             case 'Engineer':
-                property = `<p>GitHub: <a href="${employee.getGithub()}" target="_blank">${extractUsername(employee.getGithub)}</a></p>`;
+                property = `<p>GitHub: <a href="${employee.getGithub()}" target="_blank">${extractUsername(employee.getGithub())}</a></p>`;
                 break;
             case 'Intern':
                 property = `<p>School: ${employee.getSchool()}</p>`;
@@ -281,12 +282,33 @@ function writeProfile(){
                 break;
         }
         //create cards
-        //sort in order of roles MANAGERS ENGINEERS INTERNS OTHERS
+        const card =
+            `<div class="">
+                <div class="card">
+                    <div class="header info">
+                        <h2 class="heading-3">${employee.getName()}</h2>
+                        <h3 class="title-3">${type}</h3>
+                    </div>
+                    <div class="body shaded">
+                        <div class="box white">
+                            <p>ID: ${employee.getId()}</p>
+                            <br>
+                            <p>Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></p>
+                            <br>
+                            ${property}
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        cards.push(card);
     });
+    //sort in order of roles MANAGERS ENGINEERS INTERNS OTHERS
+    
 }
 
-function extractUsername() {
-    //
+function extractUsername(link) {
+    let username = link.replace(/https:\/\/github\.com\//i, '');
+    return username.trim();
 }
 
 
