@@ -303,7 +303,7 @@ function writeProfile() {
         cards.push(card);
     });
     //sort in order of roles MANAGERS ENGINEERS INTERNS OTHERS
-    
+    cards.sort(sortCards)
 }
 
 function extractUsername(link) {
@@ -311,6 +311,37 @@ function extractUsername(link) {
     return username.trim();
 }
 
+function sortCards(a, b) {
+    if(/<p>Office Number: /g.test(a) && !/<p>Office Number: /g.test(b)){
+        return 1;
+    }
+    else if(/<p>Office Number: /g.test(a) && /<p>Office Number: /g.test(b)){
+        return 0;
+    }
+    else if(!/<p>Office Number: /g.test(a) && /<p>Office Number: /g.test(b)){
+        return -1;
+    }
+
+    if(/<p>GitHub: <a href="/g.test(a) && !/<p>GitHub: <a href="/g.test(b)){
+        return 1;
+    }
+    else if(/<p>GitHub: <a href="/g.test(a) && /<p>GitHub: <a href="/g.test(b)){
+        return 0;
+    }
+    else if(!/<p>GitHub: <a href="/g.test(a) && /<p>GitHub: <a href="/g.test(b)){
+        return -1;
+    }
+
+    if(/<p>School: /g.test(a) && !/<p>School: /g.test(b)){
+        return 1;
+    }
+    else if(/<p>School: /g.test(a) && /<p>School: /g.test(b)){
+        return 0;
+    }
+    else if(!/<p>School: /g.test(a) && /<p>School: /g.test(b)){
+        return -1;
+    }
+}
 
 // function addItemPrompt(item) {
 //     const itemPrompt = {
