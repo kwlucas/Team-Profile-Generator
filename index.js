@@ -312,6 +312,7 @@ function extractUsername(link) {
 }
 
 function sortCards(a, b) {
+    //Handle all instances of having a manager ensuring they end up in front
     if(/<p>Office Number: /g.test(a) && !/<p>Office Number: /g.test(b)){
         return 1;
     }
@@ -321,7 +322,7 @@ function sortCards(a, b) {
     else if(!/<p>Office Number: /g.test(a) && /<p>Office Number: /g.test(b)){
         return -1;
     }
-
+    //Handle all instances of having an engineer ensuring they are in front (no instances of manager will make it here)
     if(/<p>GitHub: <a href="/g.test(a) && !/<p>GitHub: <a href="/g.test(b)){
         return 1;
     }
@@ -331,7 +332,7 @@ function sortCards(a, b) {
     else if(!/<p>GitHub: <a href="/g.test(a) && /<p>GitHub: <a href="/g.test(b)){
         return -1;
     }
-
+    //Handle all instances of having a student ensuring they are in front (no instances of manager or engineer will make it here)
     if(/<p>School: /g.test(a) && !/<p>School: /g.test(b)){
         return 1;
     }
@@ -340,6 +341,9 @@ function sortCards(a, b) {
     }
     else if(!/<p>School: /g.test(a) && /<p>School: /g.test(b)){
         return -1;
+    }
+    else { //if makes it her then dealing with two employee objects so unchanged
+        return 0;
     }
 }
 
