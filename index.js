@@ -263,6 +263,31 @@ function removeEmployee(id) {
 //GENERATE PROFILE
 //Generates the html file from the employee array
 //resets the employee array and returns to root selection menu
+function writeProfile(){
+    employeeArray.forEach(employee => {
+        const type = employee.getRole();
+        let property = '';
+        switch (type) {
+            case 'Manager':
+                property = `<p>Office Number: ${employee.getOffice()}</p>`;
+                break;
+            case 'Engineer':
+                property = `<p>GitHub: <a href="${employee.getGithub()}" target="_blank">${extractUsername(employee.getGithub)}</a></p>`;
+                break;
+            case 'Intern':
+                property = `<p>School: ${employee.getSchool()}</p>`;
+                break;
+            default:
+                break;
+        }
+        //create cards
+        //sort in order of roles MANAGERS ENGINEERS INTERNS OTHERS
+    });
+}
+
+function extractUsername() {
+    //
+}
 
 
 // function addItemPrompt(item) {
