@@ -370,39 +370,7 @@ function sortCards(a, b) {
     else if(!/<p>School: /g.test(a) && /<p>School: /g.test(b)){
         return -1;
     }
-    else { //if makes it her then dealing with two employee objects so unchanged
+    else { //if makes it here then dealing with two employee objects so unchanged
         return 0;
     }
 }
-
-// function addItemPrompt(item) {
-//     const itemPrompt = {
-//         type: 'confirm',
-//         name: 'willAdd',
-//         message: `Do you want to add ${item} to the readme?`,
-//         default: false
-//     };
-//     return itemPrompt;
-// };
-
-// async function addAnotherPrompt(repeatPrompt, item, itemsToAdd = []) {
-//     const itemPrompt = {
-//         type: 'confirm',
-//         name: 'addAnother',
-//         message: `Do you want to add ${item} to the list?`,
-//         default: true
-//     }
-//     const dataName = repeatPrompt.name;
-//     const questions = [repeatPrompt, itemPrompt];
-//     let askAgain = true;
-//     await inquirer.prompt(questions).then((ans) => {
-//         askAgain = ans.addAnother;
-//         itemsToAdd.push(ans[`${dataName}`]);
-//     });
-//     if(askAgain){
-//         return await addAnotherPrompt(repeatPrompt, item, itemsToAdd);
-//     }
-//     else {
-//         return itemsToAdd;
-//     }
-// }
