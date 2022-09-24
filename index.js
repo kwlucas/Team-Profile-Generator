@@ -150,7 +150,8 @@ async function launch() {
     const { rootSelection } = await inquirer.prompt(rootPrompt);
     switch (rootSelection) {
         case 'Build a team profile':
-            profileTitle = await inquirer.prompt(teamPrompt).title;
+            const titleResponse = await inquirer.prompt(teamPrompt);
+            profileTitle = titleResponse.title;
             buildOptions();
             break;
 
@@ -164,8 +165,8 @@ async function launch() {
 //choices: ['Add an employee', 'Remove an employee', 'Discard team profile', 'Finalize team profile'],
 
 async function buildOptions() {
-    const action = await inquirer.prompt(buildPrompt).buildSelection;
-    switch (action) {
+    const { buildSelection } = await inquirer.prompt(buildPrompt);
+    switch (buildSelection) {
         case 'Add an employee':
             await addEmployee();
             buildOptions();
@@ -273,7 +274,7 @@ function writeProfile() {
                 property = `<p>Office Number: ${employee.getOffice()}</p>`;
                 break;
             case 'Engineer':
-                property = `<p>GitHub: <a href="${employee.getGithub()}" target="_blank">${extractUsername(employee.getGithub())}</a></p>`;
+                property = `<p>GitHub: <a href="${employee.getGithub()}" target="_blank">${employee.getGithubName()}</a></p>`;
                 break;
             case 'Intern':
                 property = `<p>School: ${employee.getSchool()}</p>`;
@@ -339,7 +340,7 @@ function writeProfile() {
     })
 }
 
-function extractUsername(link) {
+function extractUsername(link = '') {
     let username = link.replace(/https:\/\/github\.com\//i, '');
     return username.trim();
 }
@@ -379,3 +380,5 @@ function sortCards(a, b) {
         return 0;
     }
 }
+
+launch();
