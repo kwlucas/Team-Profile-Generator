@@ -303,7 +303,35 @@ function writeProfile() {
         cards.push(card);
     });
     //sort in order of roles MANAGERS ENGINEERS INTERNS OTHERS
-    cards.sort(sortCards)
+    cards.sort(sortCards);
+
+    const cardsString = cards.join('');
+    const htmlString = 
+    `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${profileTitle}</title>
+        <link rel="stylesheet" href="https://kwlucas.github.io/Slate/css/core.css" />
+        <link rel="stylesheet" href="../css/style.css"/>
+    </head>
+    <body>
+        <header class="center-text prod-vertical-3">
+            <div class="">
+                <h1 id="team-name">${profileTitle}</h1>
+            </div>
+        </header>
+        <main>
+            <div></div>
+            <section class="slate-section set-per-row-5 center-elements" id="profile-container">
+                ${cardsString}
+            </section>
+            <div></div>
+        </main>
+    </body>
+    </html>`
 }
 
 function extractUsername(link) {
