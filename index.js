@@ -336,14 +336,14 @@ function writeProfile() {
 
     fs.writeFile(`./dist/${profileTitle}.html`, htmlString, (err) => {
         //conditional ternary operator for catching error
-        err ? console.error(err) : console.log(`"${fileName}" has been written.`);
+        err ? console.error(err) : console.log(`"${profileTitle}" has been written.`);
     })
 }
 
-function extractUsername(link = '') {
-    let username = link.replace(/https:\/\/github\.com\//i, '');
-    return username.trim();
-}
+// function extractUsername(link = '') {
+//     let username = link.replace(/https:\/\/github\.com\//i, '');
+//     return username.trim();
+// }
 
 function sortCards(a, b) {
     //Handle all instances of having a manager ensuring they end up in front
