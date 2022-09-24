@@ -1,5 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const Engineer = require("./lib/engineer");
+const Manager = require("./lib/manager");
+const Intern = require("./lib/Intern");
+const Employee = require("./lib/employee");
 
 const rootPrompt = [
     {
@@ -164,6 +168,7 @@ async function buildOptions() {
     switch (action) {
         case 'Add an employee':
             await addEmployee();
+            buildOptions();
             break;
         case 'Remove an employee':
             removeEmployee(await removePrompt());
@@ -185,18 +190,38 @@ async function buildOptions() {
 //Create object with given responses CASE
 //add new object to employee array
 //Return to "Add employee, remove employee, discard team, generate profile" selection
+async function addEmployee() {
+    const { id, name, email, role } = await inquirer.prompt(employeePrompts);
+    let newEmployee;
+    switch (role) {
+        case 'Manager':
+            newEmployee = new Manager(id, name, email, await inquirer.prompt(managerPrompt));
+            break;
+        case 'Engineer':
+            newEmployee = new Engineer(id, name, email, await inquirer.prompt(engineerPrompt));
+            break;
+        case 'Intern':
+            newEmployee = new Intern(id, name, email, await inquirer.prompt(internPrompt));
+            break;
+        default:
+            newEmployee = new Employee(id, name, email)
+            break;
+    }
+    employeeArray.push(newEmployee);
+    return;
+}
 
 //REMOVE EMPLOYEE
 //use prompt with choice option function reading the employee array.
 //removes the selected employee from array
 //Return to "Add employee, remove employee, discard team, generate profile" selection
-async function removePrompt(){
+async function removePrompt() {
     const removalPrompt = [
         {
             type: 'list',
             name: 'nameForRemoval',
             message: "What employee would you like to remove?",
-            choices: function() {
+            choices: function () {
                 let options = ['Cancel'];
                 for (let i = 0; i < employeeArray.length; i++) {
                     options.push(employeeArray[i].getName());
@@ -209,7 +234,7 @@ async function removePrompt(){
     const { nameForRemoval } = await inquirer.prompt(removalPrompt);
     let idForRemoval = '';
     for (let i = 0; i < employeeArray.length; i++) {
-        if(employeeArray[i].getName() == nameForRemoval){
+        if (employeeArray[i].getName() == nameForRemoval) {
             idForRemoval = employeeArray[i].getId();
             break;
         }
@@ -219,11 +244,11 @@ async function removePrompt(){
 }
 
 function removeEmployee(id) {
-    if(!id){
+    if (!id) {
         return;
     }
     for (let i = 0; i < employeeArray.length; i++) {
-        if(employeeArray[i].getId() === id){
+        if (employeeArray[i].getId() === id) {
             employeeArray.splice(i, 1);
             break;
         }
