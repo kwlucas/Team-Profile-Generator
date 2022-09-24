@@ -197,6 +197,7 @@ async function addEmployee() {
     switch (role) {
         case 'Manager':
             newEmployee = new Manager(id, name, email, await inquirer.prompt(managerPrompt));
+            console.log(newEmployee.getOffice());
             break;
         case 'Engineer':
             newEmployee = new Engineer(id, name, email, await inquirer.prompt(engineerPrompt));
@@ -272,6 +273,8 @@ function writeProfile() {
         switch (type) {
             case 'Manager':
                 property = `<p>Office Number: ${employee.getOffice()}</p>`;
+                console.log(property);
+                console.log(employee.getOffice());
                 break;
             case 'Engineer':
                 property = `<p>GitHub: <a href="${employee.getGithub()}" target="_blank">${employee.getGithubName()}</a></p>`;
