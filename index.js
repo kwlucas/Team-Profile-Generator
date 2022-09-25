@@ -196,14 +196,17 @@ async function addEmployee() {
     let newEmployee;
     switch (role) {
         case 'Manager':
-            newEmployee = new Manager(id, name, email, await inquirer.prompt(managerPrompt));
+            const { officeNumber } = await inquirer.prompt(managerPrompt);
+            newEmployee = new Manager(id, name, email, officeNumber);
             console.log(newEmployee.getOffice());
             break;
         case 'Engineer':
-            newEmployee = new Engineer(id, name, email, await inquirer.prompt(engineerPrompt));
+            const { gitHub } = await inquirer.prompt(engineerPrompt);
+            newEmployee = new Engineer(id, name, email, gitHub);
             break;
         case 'Intern':
-            newEmployee = new Intern(id, name, email, await inquirer.prompt(internPrompt));
+            const { school } = await inquirer.prompt(internPrompt);
+            newEmployee = new Intern(id, name, email, school);
             break;
         default:
             newEmployee = new Employee(id, name, email)
