@@ -61,7 +61,7 @@ describe("Engineer", () => {
             const newId = "7";
             const newName = "Chester";
             const newEmail = "test@email.com";
-            const newGithub = "github/user.com";
+            const newGithub = "https://github.com/user";
 
             const result = new Engineer(newId, newName, newEmail, newGithub).getGithub();
 

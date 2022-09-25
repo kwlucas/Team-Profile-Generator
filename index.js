@@ -196,13 +196,16 @@ async function addEmployee() {
     let newEmployee;
     switch (role) {
         case 'Manager':
-            newEmployee = new Manager(id, name, email, await inquirer.prompt(managerPrompt));
+            const { officeNumber } = await inquirer.prompt(managerPrompt);
+            newEmployee = new Manager(id, name, email, officeNumber);
             break;
         case 'Engineer':
-            newEmployee = new Engineer(id, name, email, await inquirer.prompt(engineerPrompt));
+            const { github } = await inquirer.prompt(engineerPrompt);
+            newEmployee = new Engineer(id, name, email, github);
             break;
         case 'Intern':
-            newEmployee = new Intern(id, name, email, await inquirer.prompt(internPrompt));
+            const { school } = await inquirer.prompt(internPrompt);
+            newEmployee = new Intern(id, name, email, school);
             break;
         default:
             newEmployee = new Employee(id, name, email)
@@ -336,7 +339,7 @@ function writeProfile() {
 
     fs.writeFile(`./dist/${profileTitle}.html`, htmlString, (err) => {
         //conditional ternary operator for catching error
-        err ? console.error(err) : console.log(`"${profileTitle}" has been written.`);
+        err ? console.error(err) : console.log(`File has been written.`);
     })
 }
 
@@ -348,33 +351,33 @@ function writeProfile() {
 function sortCards(a, b) {
     //Handle all instances of having a manager ensuring they end up in front
     if(/<p>Office Number: /g.test(a) && !/<p>Office Number: /g.test(b)){
-        return 1;
+        return -1;
     }
     else if(/<p>Office Number: /g.test(a) && /<p>Office Number: /g.test(b)){
         return 0;
     }
     else if(!/<p>Office Number: /g.test(a) && /<p>Office Number: /g.test(b)){
-        return -1;
+        return 1;
     }
     //Handle all instances of having an engineer ensuring they are in front (no instances of manager will make it here)
     if(/<p>GitHub: <a href="/g.test(a) && !/<p>GitHub: <a href="/g.test(b)){
-        return 1;
+        return -1;
     }
     else if(/<p>GitHub: <a href="/g.test(a) && /<p>GitHub: <a href="/g.test(b)){
         return 0;
     }
     else if(!/<p>GitHub: <a href="/g.test(a) && /<p>GitHub: <a href="/g.test(b)){
-        return -1;
+        return 1;
     }
     //Handle all instances of having a student ensuring they are in front (no instances of manager or engineer will make it here)
     if(/<p>School: /g.test(a) && !/<p>School: /g.test(b)){
-        return 1;
+        return -1;
     }
     else if(/<p>School: /g.test(a) && /<p>School: /g.test(b)){
         return 0;
     }
     else if(!/<p>School: /g.test(a) && /<p>School: /g.test(b)){
-        return -1;
+        return 1;
     }
     else { //if makes it here then dealing with two employee objects so unchanged
         return 0;
