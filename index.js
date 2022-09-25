@@ -147,6 +147,7 @@ let profileTitle = '';
 async function launch() {
     employeeArray = [];
     profileTitle = '';
+    //Ask root prompt
     const { rootSelection } = await inquirer.prompt(rootPrompt);
     switch (rootSelection) {
         case 'Build a team profile':
@@ -165,6 +166,7 @@ async function launch() {
 //choices: ['Add an employee', 'Remove an employee', 'Discard team profile', 'Finalize team profile'],
 
 async function buildOptions() {
+    //ask build prompt
     const { buildSelection } = await inquirer.prompt(buildPrompt);
     switch (buildSelection) {
         case 'Add an employee':
@@ -176,10 +178,13 @@ async function buildOptions() {
             buildOptions();
             break;
         case 'Discard team profile':
+            //Reset employee array and return to root selection
             launch();
             break;
         case 'Finalize team profile':
-            await writeProfile();
+            //create html page with current employees
+            writeProfile();
+            //reset employee array and return to root selection
             launch();
             break;
     }
@@ -187,13 +192,14 @@ async function buildOptions() {
 
 //ADD EMPLOYEE
 //employee prompt (id, name, email, role)
-//Ask extra property coressponding to employee role if needed CASE
-//Create object with given responses CASE
+//Ask extra property coressponding to employee role if needed
+//Create object with given responses
 //add new object to employee array
-//Return to "Add employee, remove employee, discard team, generate profile" selection
 async function addEmployee() {
+    //ask employee prompts
     const { id, name, email, role } = await inquirer.prompt(employeePrompts);
     let newEmployee;
+    //ask role specific question and create object coresponding to role
     switch (role) {
         case 'Manager':
             const { officeNumber } = await inquirer.prompt(managerPrompt);
@@ -218,8 +224,8 @@ async function addEmployee() {
 //REMOVE EMPLOYEE
 //use prompt with choice option function reading the employee array.
 //removes the selected employee from array
-//Return to "Add employee, remove employee, discard team, generate profile" selection
 async function removePrompt() {
+    //prompt with function to get list of all employees in array
     const removalPrompt = [
         {
             type: 'list',
@@ -237,6 +243,7 @@ async function removePrompt() {
     ];
     const { nameForRemoval } = await inquirer.prompt(removalPrompt);
     let idForRemoval = '';
+    //find the id of the employee with the selected name
     for (let i = 0; i < employeeArray.length; i++) {
         if (employeeArray[i].getName() == nameForRemoval) {
             idForRemoval = employeeArray[i].getId();
@@ -252,17 +259,15 @@ function removeEmployee(id) {
         return;
     }
     for (let i = 0; i < employeeArray.length; i++) {
+        //find index of employee with id
         if (employeeArray[i].getId() === id) {
+            //remove employee from employee array
             employeeArray.splice(i, 1);
             break;
         }
     }
     return;
 }
-
-//DISCARD TEAM
-//Exit and returns to root selection menu
-//resets employee array
 
 //GENERATE PROFILE
 //Generates the html file from the employee array
@@ -272,6 +277,7 @@ function writeProfile() {
     employeeArray.forEach(employee => {
         const type = employee.getRole();
         let property = '';
+        //Write the extra line for role specific properties
         switch (type) {
             case 'Manager':
                 property = `<p>Office Number: ${employee.getOffice()}</p>`;
@@ -308,8 +314,9 @@ function writeProfile() {
     });
     //sort in order of roles MANAGERS ENGINEERS INTERNS OTHERS
     cards.sort(sortCards);
-
+    //put all the cards together in one long string
     const cardsString = cards.join('');
+    //insert them into the full html page
     const htmlString = 
     `<!DOCTYPE html>
     <html lang="en">
@@ -337,16 +344,12 @@ function writeProfile() {
     </body>
     </html>`
 
+    //write file to the dist folder with the team name
     fs.writeFile(`./dist/${profileTitle}.html`, htmlString, (err) => {
         //conditional ternary operator for catching error
-        err ? console.error(err) : console.log(`File has been written.`);
+        err ? console.error(err) : console.log(`File has been written.\n`);
     })
 }
-
-// function extractUsername(link = '') {
-//     let username = link.replace(/https:\/\/github\.com\//i, '');
-//     return username.trim();
-// }
 
 function sortCards(a, b) {
     //Handle all instances of having a manager ensuring they end up in front
@@ -384,4 +387,5 @@ function sortCards(a, b) {
     }
 }
 
+//run the program
 launch();
