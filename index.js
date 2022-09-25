@@ -198,7 +198,6 @@ async function addEmployee() {
         case 'Manager':
             const { officeNumber } = await inquirer.prompt(managerPrompt);
             newEmployee = new Manager(id, name, email, officeNumber);
-            console.log(newEmployee.getOffice());
             break;
         case 'Engineer':
             const { gitHub } = await inquirer.prompt(engineerPrompt);
@@ -276,8 +275,6 @@ function writeProfile() {
         switch (type) {
             case 'Manager':
                 property = `<p>Office Number: ${employee.getOffice()}</p>`;
-                console.log(property);
-                console.log(employee.getOffice());
                 break;
             case 'Engineer':
                 property = `<p>GitHub: <a href="${employee.getGithub()}" target="_blank">${employee.getGithubName()}</a></p>`;
@@ -342,7 +339,7 @@ function writeProfile() {
 
     fs.writeFile(`./dist/${profileTitle}.html`, htmlString, (err) => {
         //conditional ternary operator for catching error
-        err ? console.error(err) : console.log(`"${profileTitle}" has been written.`);
+        err ? console.error(err) : console.log(`File has been written.`);
     })
 }
 
