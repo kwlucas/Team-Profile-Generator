@@ -200,8 +200,8 @@ async function addEmployee() {
             newEmployee = new Manager(id, name, email, officeNumber);
             break;
         case 'Engineer':
-            const { gitHub } = await inquirer.prompt(engineerPrompt);
-            newEmployee = new Engineer(id, name, email, gitHub);
+            const { github } = await inquirer.prompt(engineerPrompt);
+            newEmployee = new Engineer(id, name, email, github);
             break;
         case 'Intern':
             const { school } = await inquirer.prompt(internPrompt);
