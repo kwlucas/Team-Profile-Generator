@@ -351,11 +351,6 @@ function writeProfile() {
     })
 }
 
-// function extractUsername(link = '') {
-//     let username = link.replace(/https:\/\/github\.com\//i, '');
-//     return username.trim();
-// }
-
 function sortCards(a, b) {
     //Handle all instances of having a manager ensuring they end up in front
     if(/<p>Office Number: /g.test(a) && !/<p>Office Number: /g.test(b)){
